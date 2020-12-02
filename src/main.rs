@@ -14,13 +14,15 @@ fn main() {
         match key {
             Ok(key) => match key {
                 Key::Char(c) => {
-                    if c.is_control() {
+                    println!("{:?} ({})\r", c as u8, c);
+                }
+                Key::Ctrl(c) => {
+                    if c != 'q' {
                         println!("{:?}\r", c as u8);
                     } else {
-                        println!("{:?} ({})\r", c as u8, c);
+                        break;
                     }
                 }
-                Key::Ctrl('q') => break,
                 _ => println!("{:?}\r", key),
             },
             Err(err) => die(err),
